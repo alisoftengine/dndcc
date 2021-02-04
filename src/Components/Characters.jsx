@@ -1,44 +1,30 @@
-// import { useState, useEffect } from 'react';
-import CharactersData from '../character-seed.json';
+import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
-export default function Characters({ match }) {
-   //    const [characters, setCharacters] = useState([]);
-   //    const fetchCharacters = async () => {
-   //       await fetch('')
-   //          .then(res => res.json())
-   //          .then(res => {
-   //             setCharacters(res);
-   //          });
-   //    };
-   //    useEffect(() => {
-   //       fetchCharacters();
-   //    }, []);
+export default function Characters() {
+   const [characters, setCharacters] = useState([]);
+   const fetchCharacters = async () => {
+      await fetch('https://dndcc-api.herokuapp.com/characters')
+         .then(res => res.json())
+         .then(res => {
+            setCharacters(res);
+         })
+         .catch(console.error);
+   };
+   useEffect(() => {
+      fetchCharacters();
+   }, []);
 
    return (
-      <div>
-         {CharactersData.map(character => {
-            return (
-               <div>
-                  <h1>Campaign: {character.campaign}</h1>
-                  <h3>
-                     Adventurer: {character.name}({character.player}),{' '}
-                     {character.sex}
-                  </h3>
-
-                  <p>
-                     Personality: A {character.alignment} {character.background}
-                  </p>
-
-                  <h3>Attributes</h3>
-                  <h4>Strength: {character.abilities.strength}</h4>
-                  <h4>Dexterity: {character.abilities.dexterity}</h4>
-                  <h4>Constitution: {character.abilities.constitution}</h4>
-                  <h4>Intelligence: {character.abilities.intelligence}</h4>
-                  <h4>Wisdom: {character.abilities.wisdom}</h4>
-                  <h4>Charisma: {character.abilities.charisma}</h4>
-               </div>
-            );
-         })}
-      </div>
+      <section>
+         {characters &&
+            characters.map(characterInfo => {
+               return (
+                  <Link to={`/characters/${characterInfo._id}`}>
+                     {characterInfo.name}
+                  </Link>
+               );
+            })}
+      </section>
    );
 }
