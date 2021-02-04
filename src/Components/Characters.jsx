@@ -1,17 +1,17 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 export default function Characters() {
    const [characters, setCharacters] = useState([]);
-   const fetchCharacters = async () => {
-      await fetch('https://dndcc-api.herokuapp.com/characters')
-         .then(res => res.json())
-         .then(res => {
-            setCharacters(res);
-         })
-         .catch(console.error);
-   };
+
    useEffect(() => {
+      const fetchCharacters = async () => {
+         const charList = await axios(
+            'https://dndcc-api.herokuapp.com/characters'
+         );
+         setCharacters(charList.data);
+      };
       fetchCharacters();
    }, []);
 
@@ -20,7 +20,9 @@ export default function Characters() {
          {characters &&
             characters.map(characterInfo => {
                return (
-                  <Link to={`/characters/${characterInfo._id}`}>
+                  <Link
+                     to={`/characters/${characterInfo._id}`}
+                     key={characterInfo._id}>
                      {characterInfo.name}
                   </Link>
                );
