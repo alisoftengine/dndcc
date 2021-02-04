@@ -1,5 +1,5 @@
 import './App.css';
-import { Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import Header from './Components/Header';
 import Landing from './Components/Landing';
 import Characters from './Components/Characters';
@@ -10,18 +10,18 @@ function App() {
       <div className='App'>
          <Header />
          <main>
-            <Route path='/' render={() => <Landing />} />
-            <Route exact path='/characters' render={() => <Characters />} />
-            <Route
-               exact
-               path='/characters/:id'
-               render={routerProps => (
-                  <CharacterInfo match={routerProps.match} />
-               )}
-            />
+            <Switch>
+               <Route
+                  path='/characters/:id'
+                  render={routerProps => (
+                     <CharacterInfo match={routerProps.match} />
+                  )}
+               />
+               <Route path='/characters' render={() => <Characters />} />
+               <Route path='/' render={() => <Landing />} />
+            </Switch>
          </main>
       </div>
    );
 }
-// <Route exact path='/characters/:id' render={(routerProps) => <CharacterDetails match={routerProps.match}/>}/>
 export default App;
