@@ -1,11 +1,14 @@
 import { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import axios from 'axios';
 
 export default function Landing() {
    const [character, setCharacter] = useState({});
    const [showModal, setShowModal] = useState(false);
+   const history = useHistory();
 
    // static creation options
    // TODO move these to a collection on the server and request them on render
@@ -97,7 +100,7 @@ export default function Landing() {
          ...character,
          abilities: {
             ...character.abilities,
-            [event.target.name]: event.target.value
+            [event.target.name]: Number(event.target.value)
          }
       });
    }
@@ -113,7 +116,21 @@ export default function Landing() {
       }
 
       validateSubmit();
-      console.log(character);
+      postCharacter().then(id => history.push(`/characters/${id}`));
+   }
+
+   async function postCharacter() {
+      const url = 'https://dndcc-api.herokuapp.com/characters';
+      const headers = { 'Content-Type': 'application/json' };
+
+      try {
+         const response = await axios.post(url, character, {
+            headers: headers
+         });
+         return response.data._id;
+      } catch (error) {
+         console.error(error);
+      }
    }
 
    return (
@@ -173,6 +190,7 @@ export default function Landing() {
                      type='radio'
                      name='sex'
                      value={sex}
+                     onChange={handleChange}
                   />
                ))}
             </Form.Group>
