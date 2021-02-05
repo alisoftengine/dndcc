@@ -9,7 +9,26 @@ import axios from 'axios';
 import '../Styles/Landing.css';
 
 export default function Landing() {
-   const [character, setCharacter] = useState({});
+   const initCharacter = {
+      player: '',
+      campaign: '',
+      name: '',
+      sex: '',
+      race: '',
+      class: '',
+      background: '',
+      alignment: '',
+      abilities: {
+         strength: '',
+         dexterity: '',
+         constitution: '',
+         intelligence: '',
+         wisdom: '',
+         charisma: ''
+      }
+   };
+
+   const [character, setCharacter] = useState(initCharacter);
    const [showModal, setShowModal] = useState(false);
    const history = useHistory();
 
@@ -167,6 +186,7 @@ export default function Landing() {
                   type='text'
                   placeholder='Enter your name'
                   name='player'
+                  value={character.player}
                   onChange={handleChange}
                />
             </Form.Group>
@@ -177,6 +197,7 @@ export default function Landing() {
                   type='text'
                   placeholder='Enter campaign name'
                   name='campaign'
+                  value={character.campaign}
                   onChange={handleChange}
                />
             </Form.Group>
@@ -187,6 +208,7 @@ export default function Landing() {
                   type='text'
                   placeholder='Enter character name'
                   name='name'
+                  value={character.name}
                   onChange={handleChange}
                />
                <Form.Text>Character name is required.</Form.Text>
@@ -203,6 +225,7 @@ export default function Landing() {
                         type='radio'
                         name='sex'
                         value={sex}
+                        checked={character.sex === sex}
                         onChange={handleChange}
                      />
                   ))}
@@ -213,7 +236,7 @@ export default function Landing() {
                <Form.Label>Race</Form.Label>
                <select
                   name='race'
-                  defaultValue='select'
+                  defaultValue={character.race || 'select'}
                   onChange={handleChange}>
                   <option value='select' disabled hidden>
                      Choose your race
@@ -230,7 +253,7 @@ export default function Landing() {
                <Form.Label>Class</Form.Label>
                <select
                   name='class'
-                  defaultValue='select'
+                  defaultValue={character.class || 'select'}
                   onChange={handleChange}>
                   <option value='select' disabled hidden>
                      Choose your class
@@ -247,7 +270,7 @@ export default function Landing() {
                <Form.Label>Background</Form.Label>
                <select
                   name='background'
-                  defaultValue='select'
+                  defaultValue={character.background || 'select'}
                   onChange={handleChange}>
                   <option value='select' disabled hidden>
                      Choose your background
@@ -264,7 +287,7 @@ export default function Landing() {
                <Form.Label>Alignment</Form.Label>
                <select
                   name='alignment'
-                  defaultValue='select'
+                  defaultValue={character.alignment || 'select'}
                   onChange={handleChange}>
                   <option value='select' disabled hidden>
                      Choose your alignment
@@ -282,11 +305,7 @@ export default function Landing() {
                   <div className='stat-container'>
                      <Form.Label>{toTitleCase(ability)}</Form.Label>
                      <Badge variant='primary'>
-                        {/* 11 is the starting position of the range */}
-                        {(character &&
-                           character.abilities &&
-                           character.abilities[ability]) ||
-                           '??'}
+                        {character.abilities[ability] || '??'}
                      </Badge>
                   </div>
                   <Form.Control
@@ -294,6 +313,7 @@ export default function Landing() {
                      name={ability}
                      min='3'
                      max='18'
+                     value={character.abilities[ability]}
                      onChange={handleAbilityChange}
                   />
                </Form.Group>
