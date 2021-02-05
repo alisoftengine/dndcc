@@ -1,0 +1,75 @@
+.create-header + .form-text {
+   margin-bottom: 2rem;
+}
+
+.name-container,
+.sex-container,
+.dropdown-container,
+.range-container {
+   display: grid;
+   margin-top: 1rem;
+}
+
+.name-container,
+.sex-container {
+   grid-template-columns: 80px 1fr;
+}
+
+.name-container {
+   align-items: end;
+}
+
+.name-container .form-label,
+.sex-container .form-label,
+.dropdown-container .form-label,
+.range-container .stat-container {
+   grid-column: 1 / span 1;
+   justify-self: end;
+   margin-right: 0.5rem;
+}
+
+.name-container .form-control,
+.sex-container .sex-options,
+.character-name-container .form-text,
+.dropdown-container select,
+.range-container .form-control-range {
+   grid-column: 2 / span 1;
+}
+
+.character-name-container {
+   grid-template-rows: 1fr 20px;
+}
+
+.character-name-container .form-label,
+.character-name-container .form-control {
+   grid-row: 1 / span 1;
+}
+
+.character-name-container .form-text {
+   color: red;
+   grid-row: 2 / span 1;
+   justify-self: start;
+   margin-left: 0.5rem;
+}
+
+.sex-container,
+.dropdown-container {
+   align-self: start;
+}
+
+.sex-container .sex-options {
+   display: flex;
+   margin-left: 0.5rem;
+}
+
+.dropdown-container {
+   grid-template-columns: 90px 1fr;
+}
+
+.range-container {
+   grid-template-columns: 130px 1fr;
+}
+
+.range-container .stat-container .form-label {
+   margin-right: 0.5rem;
+}
