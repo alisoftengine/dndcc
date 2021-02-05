@@ -1,0 +1,13 @@
+#view-button {
+   display: flex;
+   width: 5rem;
+}
+
+.character-link {
+   width: 10rem;
+}
+
+.character-name {
+   font-style: bold;
+   font-size: 2rem;
+}

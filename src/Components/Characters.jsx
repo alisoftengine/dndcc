@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { ListGroup } from 'react-bootstrap';
+import '../Styles/Characters.css';
 
 export default function Characters() {
    const [characters, setCharacters] = useState([]);
@@ -20,11 +22,28 @@ export default function Characters() {
          {characters &&
             characters.map(characterInfo => {
                return (
-                  <Link
-                     to={`/characters/${characterInfo._id}`}
-                     key={characterInfo._id}>
-                     {characterInfo.name}
-                  </Link>
+                  <ListGroup variant='flush'>
+                     <ListGroup.Item>
+                        <div className='character'>
+                           <li className='list-group-item'>
+                              <span className='character-name'>
+                                 {characterInfo.name}
+                              </span>
+                              <Link
+                                 className='character-link'
+                                 to={`/characters/${characterInfo._id}`}
+                                 key={characterInfo._id}>
+                                 <button
+                                    type='button'
+                                    className='btn btn-outline-dark btn-sm'
+                                    id='view-button'>
+                                    View Character
+                                 </button>
+                              </Link>
+                           </li>
+                        </div>
+                     </ListGroup.Item>
+                  </ListGroup>
                );
             })}
       </section>
