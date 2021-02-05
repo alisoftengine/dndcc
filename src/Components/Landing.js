@@ -1,12 +1,34 @@
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import Form from 'react-bootstrap/Form';
+import Badge from 'react-bootstrap/Badge';
 import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 import axios from 'axios';
 
+import '../Styles/Landing.css';
+
 export default function Landing() {
-   const [character, setCharacter] = useState({});
+   const initCharacter = {
+      player: '',
+      campaign: '',
+      name: '',
+      sex: '',
+      race: '',
+      class: '',
+      background: '',
+      alignment: '',
+      abilities: {
+         strength: '',
+         dexterity: '',
+         constitution: '',
+         intelligence: '',
+         wisdom: '',
+         charisma: ''
+      }
+   };
+
+   const [character, setCharacter] = useState(initCharacter);
    const [showModal, setShowModal] = useState(false);
    const history = useHistory();
 
@@ -134,7 +156,7 @@ export default function Landing() {
    }
 
    return (
-      <div className='creator-form-container'>
+      <div className='create-form-container'>
          <Modal show={showModal} background='static' keyboard='false'>
             <Modal.Header>
                <Modal.Title>Invalid character name</Modal.Title>
@@ -150,56 +172,71 @@ export default function Landing() {
             </Modal.Footer>
          </Modal>
 
-         <Form className='creator' onSubmit={handleSubmit}>
-            <Form.Group>
-               <Form.Label>Player:</Form.Label>
+         <Form className='create-form' onSubmit={handleSubmit}>
+            <h3 className='create-header'>Create your Character</h3>
+            <Form.Text>
+               Enter the character name and hit submit
+               <br />
+               for a randomly generated character.
+            </Form.Text>
+
+            <Form.Group className='name-container'>
+               <Form.Label>Player</Form.Label>
                <Form.Control
                   type='text'
                   placeholder='Enter your name'
                   name='player'
+                  value={character.player}
                   onChange={handleChange}
                />
             </Form.Group>
 
-            <Form.Group>
-               <Form.Label>Campaign:</Form.Label>
+            <Form.Group className='name-container'>
+               <Form.Label>Campaign</Form.Label>
                <Form.Control
                   type='text'
                   placeholder='Enter campaign name'
                   name='campaign'
+                  value={character.campaign}
                   onChange={handleChange}
                />
             </Form.Group>
 
-            <Form.Group>
-               <Form.Label>Character:</Form.Label>
+            <Form.Group className='character-name-container name-container'>
+               <Form.Label>Character</Form.Label>
                <Form.Control
                   type='text'
                   placeholder='Enter character name'
                   name='name'
+                  value={character.name}
                   onChange={handleChange}
                />
+               <Form.Text>Character name is required.</Form.Text>
             </Form.Group>
 
-            <Form.Group>
-               {sexes.map(sex => (
-                  <Form.Check
-                     inline
-                     key={sex}
-                     label={toTitleCase(sex)}
-                     type='radio'
-                     name='sex'
-                     value={sex}
-                     onChange={handleChange}
-                  />
-               ))}
+            <Form.Group className='sex-container'>
+               <Form.Label>Sex</Form.Label>
+               <div className='sex-options'>
+                  {sexes.map(sex => (
+                     <Form.Check
+                        inline
+                        key={sex}
+                        label={toTitleCase(sex)}
+                        type='radio'
+                        name='sex'
+                        value={sex}
+                        checked={character.sex === sex}
+                        onChange={handleChange}
+                     />
+                  ))}
+               </div>
             </Form.Group>
 
-            <Form.Group>
-               <Form.Label>Race:</Form.Label>
+            <Form.Group className='dropdown-container'>
+               <Form.Label>Race</Form.Label>
                <select
                   name='race'
-                  defaultValue='select'
+                  defaultValue={character.race || 'select'}
                   onChange={handleChange}>
                   <option value='select' disabled hidden>
                      Choose your race
@@ -212,11 +249,11 @@ export default function Landing() {
                </select>
             </Form.Group>
 
-            <Form.Group>
-               <Form.Label>Class:</Form.Label>
+            <Form.Group className='dropdown-container'>
+               <Form.Label>Class</Form.Label>
                <select
                   name='class'
-                  defaultValue='select'
+                  defaultValue={character.class || 'select'}
                   onChange={handleChange}>
                   <option value='select' disabled hidden>
                      Choose your class
@@ -229,11 +266,11 @@ export default function Landing() {
                </select>
             </Form.Group>
 
-            <Form.Group>
-               <Form.Label>Background:</Form.Label>
+            <Form.Group className='dropdown-container'>
+               <Form.Label>Background</Form.Label>
                <select
                   name='background'
-                  defaultValue='select'
+                  defaultValue={character.background || 'select'}
                   onChange={handleChange}>
                   <option value='select' disabled hidden>
                      Choose your background
@@ -246,11 +283,11 @@ export default function Landing() {
                </select>
             </Form.Group>
 
-            <Form.Group>
-               <Form.Label>Alignment:</Form.Label>
+            <Form.Group className='dropdown-container'>
+               <Form.Label>Alignment</Form.Label>
                <select
                   name='alignment'
-                  defaultValue='select'
+                  defaultValue={character.alignment || 'select'}
                   onChange={handleChange}>
                   <option value='select' disabled hidden>
                      Choose your alignment
@@ -264,13 +301,19 @@ export default function Landing() {
             </Form.Group>
 
             {abilities.map(ability => (
-               <Form.Group key={ability}>
-                  <Form.Label>{toTitleCase(ability)}:</Form.Label>
+               <Form.Group key={ability} className='range-container'>
+                  <div className='stat-container'>
+                     <Form.Label>{toTitleCase(ability)}</Form.Label>
+                     <Badge variant='primary'>
+                        {character.abilities[ability] || '??'}
+                     </Badge>
+                  </div>
                   <Form.Control
                      type='range'
                      name={ability}
                      min='3'
                      max='18'
+                     value={character.abilities[ability]}
                      onChange={handleAbilityChange}
                   />
                </Form.Group>
