@@ -1,12 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Potta+One&display=swap');
+
 :root {
    --accent: #d62828;
    --hover: #f77f00;
    --fg: #fcbf49;
    --bg: #003049;
+
+   --main-font: 'Potta One', cursive;
+   --accent-font: 'Montserrat', sans-serif;
 }
 
 body {
    color: var(--fg);
    background-color: var(--bg);
+   font-family: var(--accent-font);
    margin: 0;
 }

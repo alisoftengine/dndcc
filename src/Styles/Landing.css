@@ -16,7 +16,7 @@
 
 .name-container,
 .sex-container {
-   grid-template-columns: 80px 1fr;
+   grid-template-columns: 90px 1fr;
 }
 
 .name-container {
@@ -41,7 +41,7 @@
 }
 
 .character-name-container {
-   grid-template-rows: 1fr 20px;
+   grid-template-rows: 1fr 24px;
 }
 
 .character-name-container .form-label,
@@ -64,7 +64,7 @@
 }
 
 .dropdown-container {
-   grid-template-columns: 90px 1fr;
+   grid-template-columns: 100px 1fr;
 }
 
 .dropdown-container select {
@@ -72,7 +72,7 @@
 }
 
 .range-container {
-   grid-template-columns: 130px 1fr;
+   grid-template-columns: 140px 1fr;
 }
 
 .range-container .stat-container .form-label {

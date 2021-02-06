@@ -5,7 +5,9 @@ export default function Header() {
    return (
       <header>
          <h1>
-            Dungeons & Dragons
+            DUNGEONS
+            <br />
+            &DRAGONS
             <br />
             Character Creator
          </h1>
