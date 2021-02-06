@@ -2,6 +2,7 @@
    background-color: var(--accent);
 }
 
-.navbar-nav .nav-item .nav-link {
+.navbar-nav .nav-item .nav-link,
+.navbar-nav .nav-item .nav-link:hover {
    color: white;
 }

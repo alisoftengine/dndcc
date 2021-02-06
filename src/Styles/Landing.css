@@ -34,7 +34,7 @@
 
 .name-container .form-control,
 .sex-container .sex-options,
-.character-name-container .form-text,
+.character-name-container .required,
 .dropdown-container select,
 .range-container .form-control-range {
    grid-column: 2 / span 1;
@@ -49,9 +49,9 @@
    grid-row: 1 / span 1;
 }
 
-.character-name-container .form-text {
-   color: var(--accent);
-   text-shadow: 0 0 3px black;
+.character-name-container .required {
+   color: white;
+   background-color: var(--accent);
    grid-row: 2 / span 1;
    justify-self: start;
    margin-left: 0.5rem;
@@ -77,4 +77,23 @@
 
 .range-container .stat-container .form-label {
    margin-right: 0.5rem;
+}
+
+.stat {
+   color: var(--bg);
+   background-color: var(--fg);
+}
+
+.create-form button {
+   color: var(--bg);
+   background-color: var(--fg);
+   font-size: 1rem;
+   border-color: transparent;
+   padding: 0.8rem 1.2rem;
+}
+
+.create-form button:hover {
+   color: var(--bg);
+   background-color: var(--hover);
+   border-color: transparent;
 }

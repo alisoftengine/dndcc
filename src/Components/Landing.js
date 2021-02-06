@@ -211,7 +211,7 @@ export default function Landing() {
                   value={character.name}
                   onChange={handleChange}
                />
-               <Form.Text>REQUIRED</Form.Text>
+               <Badge className='required'>REQUIRED</Badge>
             </Form.Group>
 
             <Form.Group className='sex-container'>
@@ -304,7 +304,7 @@ export default function Landing() {
                <Form.Group key={ability} className='range-container'>
                   <div className='stat-container'>
                      <Form.Label>{toTitleCase(ability)}</Form.Label>
-                     <Badge variant='primary'>
+                     <Badge className='stat'>
                         {character.abilities[ability] || '??'}
                      </Badge>
                   </div>
@@ -319,9 +319,7 @@ export default function Landing() {
                </Form.Group>
             ))}
 
-            <Button type='submit' variant='primary'>
-               Submit
-            </Button>
+            <Button type='submit'>SUBMIT</Button>
          </Form>
       </div>
    );
