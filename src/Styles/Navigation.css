@@ -1,8 +1,7 @@
-/* .nav-bar {
-   display: flex;
-   flex-direction: row;
-   justify-items: end;
-} */
+.navbar {
+   background-color: var(--accent);
+}
 
-#links {
+.navbar-nav .nav-item .nav-link {
+   color: white;
 }

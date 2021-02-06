@@ -211,7 +211,7 @@ export default function Landing() {
                   value={character.name}
                   onChange={handleChange}
                />
-               <Form.Text>Character name is required.</Form.Text>
+               <Form.Text>REQUIRED</Form.Text>
             </Form.Group>
 
             <Form.Group className='sex-container'>

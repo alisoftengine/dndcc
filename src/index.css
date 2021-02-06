@@ -1,5 +1,11 @@
+:root {
+   --accent: #d62828;
+   --fg: #fcbf49;
+   --bg: #003049;
+}
+
 body {
+   color: var(--fg);
+   background-color: var(--bg);
    margin: 0;
-   -webkit-font-smoothing: antialiased;
-   -moz-osx-font-smoothing: grayscale;
 }
