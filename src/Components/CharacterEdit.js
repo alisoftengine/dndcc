@@ -134,15 +134,15 @@ export default function CharacterEdit({ match }) {
       }
 
       validateSubmit();
-      postCharacter().then(id => history.push(`/characters/${id}`));
+      putCharacter().then(id => history.push(`/characters/${id}`));
    }
 
-   async function postCharacter() {
-      const url = 'https://dndcc-api.herokuapp.com/characters';
+   async function putCharacter() {
+      const url = `https://dndcc-api.herokuapp.com/characters/${character._id}`;
       const headers = { 'Content-Type': 'application/json' };
 
       try {
-         const response = await axios.post(url, character, {
+         const response = await axios.put(url, character, {
             headers: headers
          });
          return response.data._id;
@@ -320,11 +320,10 @@ export default function CharacterEdit({ match }) {
                   />
                </Form.Group>
             ))}
-            <Link to='/characters'>
-               <Button type='submit' variant='success'>
-                  SUBMIT
-               </Button>
-            </Link>
+
+            <Button type='submit' variant='success'>
+               SUBMIT
+            </Button>
          </Form>
       </>
    );
