@@ -98,15 +98,9 @@ export default function CharacterEdit({ match }) {
       'charisma'
    ];
 
-   const toTitleCase = string =>
-      string
-         .split(' ')
-         .map(word => word[0].toUpperCase().concat(word.slice(1)))
-         .join(' ');
-
    // make sure our data validates against our schema before sending it over
    // if certain fields are missing, randomly choose them
-   function validateSubmit() {
+   const validateSubmit = () => {
       const sample = array => array[Math.floor(Math.random() * array.length)];
 
       character.sex = character.sex || sample(sexes);
@@ -116,10 +110,10 @@ export default function CharacterEdit({ match }) {
       character.alignment = character.alignment || sample(alignments);
 
       validateAbilities();
-   }
+   };
 
    // abilities need special consideration
-   function validateAbilities() {
+   const validateAbilities = () => {
       // this gives our valid range of ability point scores [3, 18]
       const sample = () => Math.floor(Math.random() * 16) + 3;
 
@@ -130,13 +124,14 @@ export default function CharacterEdit({ match }) {
             (character.abilities[ability] =
                character.abilities[ability] || sample())
       );
-   }
+   };
 
-   function handleChange(event) {
+   const handleClose = () => setShowModal(false);
+
+   const handleChange = event =>
       setCharacter({ ...character, [event.target.name]: event.target.value });
-   }
 
-   function handleAbilityChange(event) {
+   const handleAbilityChange = event =>
       setCharacter({
          ...character,
          abilities: {
@@ -144,9 +139,8 @@ export default function CharacterEdit({ match }) {
             [event.target.name]: Number(event.target.value)
          }
       });
-   }
 
-   function handleSubmit(event) {
+   const handleSubmit = event => {
       event.preventDefault();
 
       // character names are REQUIRED in our schema
@@ -158,9 +152,9 @@ export default function CharacterEdit({ match }) {
 
       validateSubmit();
       putCharacter().then(id => history.push(`/characters/${id}`));
-   }
+   };
 
-   async function putCharacter() {
+   const putCharacter = async () => {
       const url =
          process.env.NODE_ENV === 'production'
             ? `https://dndcc-api.herokuapp.com/characters/${character._id}`
@@ -175,9 +169,13 @@ export default function CharacterEdit({ match }) {
       } catch (error) {
          console.error(error);
       }
-   }
+   };
 
-   const handleClose = () => setShowModal(false);
+   const toTitleCase = string =>
+      string
+         .split(' ')
+         .map(word => word[0].toUpperCase().concat(word.slice(1)))
+         .join(' ');
 
    return (
       <>
