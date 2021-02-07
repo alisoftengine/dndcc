@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import Button from 'react-bootstrap/Button';
+import ListGroup from 'react-bootstrap/ListGroup';
 import axios from 'axios';
-import { ListGroup } from 'react-bootstrap';
+
 import '../Styles/Characters.css';
 
 export default function Characters() {
@@ -18,34 +19,25 @@ export default function Characters() {
    }, []);
 
    return (
-      <section>
-         {characters &&
-            characters.map(characterInfo => {
-               return (
-                  <ListGroup variant='flush'>
-                     <ListGroup.Item>
-                        <div className='character'>
-                           <li className='list-group-item'>
-                              <span className='character-name'>
-                                 {characterInfo.name}
-                              </span>
-                              <Link
-                                 className='character-link'
-                                 to={`/characters/${characterInfo._id}`}
-                                 key={characterInfo._id}>
-                                 <button
-                                    type='button'
-                                    className='btn btn-outline-dark btn-sm'
-                                    id='view-button'>
-                                    View Character
-                                 </button>
-                              </Link>
-                           </li>
-                        </div>
-                     </ListGroup.Item>
-                  </ListGroup>
-               );
-            })}
-      </section>
+      <ListGroup>
+         {characters.map(characterInfo => {
+            return (
+               <ListGroup.Item key={characterInfo._id} className='character'>
+                  <p className='character-name'>{characterInfo.name}</p>
+                  <div className='controls'>
+                     <Button className='view-button' variant='success'>
+                        VIEW
+                     </Button>
+                     <Button className='edit-button' variant='dark'>
+                        EDIT
+                     </Button>
+                     <Button className='delete-button' variant='danger'>
+                        DELETE
+                     </Button>
+                  </div>
+               </ListGroup.Item>
+            );
+         })}
+      </ListGroup>
    );
 }

@@ -50,8 +50,7 @@
 }
 
 .character-name-container .required {
-   color: white;
-   background-color: var(--accent);
+   color: var(--bg);
    grid-row: 2 / span 1;
    justify-self: start;
    margin-left: 0.5rem;
@@ -61,6 +60,19 @@
    display: flex;
    align-self: start;
    margin-left: 0.5rem;
+}
+
+.sex-options input {
+   appearance: none;
+   width: 1rem;
+   height: 1rem;
+   border: 3px solid var(--fg);
+   border-radius: 50%;
+   transition: all 0.2s linear;
+}
+
+.sex-options input:checked {
+   border-width: 8px;
 }
 
 .dropdown-container {
@@ -79,21 +91,7 @@
    margin-right: 0.5rem;
 }
 
-.stat {
-   color: var(--bg);
-   background-color: var(--fg);
-}
-
 .create-form button {
-   color: var(--bg);
-   background-color: var(--fg);
    font-size: 1rem;
-   border-color: transparent;
    padding: 0.8rem 1.2rem;
-}
-
-.create-form button:hover {
-   color: var(--bg);
-   background-color: var(--hover);
-   border-color: transparent;
 }
