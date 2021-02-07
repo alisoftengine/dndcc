@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import Badge from 'react-bootstrap/Badge';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
@@ -9,24 +9,47 @@ import axios from 'axios';
 import '../Styles/Landing.css';
 
 export default function CharacterEdit({ match }) {
-   const [character, setCharacter] = useState();
+   const initCharacter = {
+      player: '',
+      campaign: '',
+      name: '',
+      sex: '',
+      race: '',
+      class: '',
+      background: '',
+      alignment: '',
+      abilities: {
+         strength: '',
+         dexterity: '',
+         constitution: '',
+         intelligence: '',
+         wisdom: '',
+         charisma: ''
+      }
+   };
+
+   const [character, setCharacter] = useState(initCharacter);
    const [showModal, setShowModal] = useState(false);
    const history = useHistory();
 
+   useEffect(
+      () => fetchCharacter(match.params.id).then(data => setCharacter(data)),
+      [match]
+   );
+
    const fetchCharacter = async id => {
-      await fetch(`https://dndcc-api.herokuapp.com/characters/${id}`)
-         .then(res => res.json())
-         .then(res => {
-            setCharacter(res);
-         })
-         .then(() => {
-            console.log(character);
-         })
-         .catch(console.error);
+      try {
+         const url =
+            process.env.NODE_ENV === 'production'
+               ? `https://dndcc-api.herokuapp.com/characters/${id}`
+               : `http://localhost:4000/characters/${id}`;
+
+         const response = await axios(url);
+         return response.data;
+      } catch (error) {
+         console.log(error);
+      }
    };
-   useEffect(() => {
-      fetchCharacter(match.params.id);
-   }, [match.params.id]);
 
    // static creation options
    // TODO move these to a collection on the server and request them on render
@@ -138,7 +161,10 @@ export default function CharacterEdit({ match }) {
    }
 
    async function putCharacter() {
-      const url = `https://dndcc-api.herokuapp.com/characters/${character._id}`;
+      const url =
+         process.env.NODE_ENV === 'production'
+            ? `https://dndcc-api.herokuapp.com/characters/${character._id}`
+            : `http://localhost:4000/characters/${character._id}`;
       const headers = { 'Content-Type': 'application/json' };
 
       try {

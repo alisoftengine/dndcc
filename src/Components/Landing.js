@@ -79,15 +79,9 @@ export default function Landing() {
       'charisma'
    ];
 
-   const toTitleCase = string =>
-      string
-         .split(' ')
-         .map(word => word[0].toUpperCase().concat(word.slice(1)))
-         .join(' ');
-
    // make sure our data validates against our schema before sending it over
    // if certain fields are missing, randomly choose them
-   function validateSubmit() {
+   const validateSubmit = () => {
       const sample = array => array[Math.floor(Math.random() * array.length)];
 
       character.sex = character.sex || sample(sexes);
@@ -97,10 +91,10 @@ export default function Landing() {
       character.alignment = character.alignment || sample(alignments);
 
       validateAbilities();
-   }
+   };
 
    // abilities need special consideration
-   function validateAbilities() {
+   const validateAbilities = () => {
       // this gives our valid range of ability point scores [3, 18]
       const sample = () => Math.floor(Math.random() * 16) + 3;
 
@@ -111,13 +105,14 @@ export default function Landing() {
             (character.abilities[ability] =
                character.abilities[ability] || sample())
       );
-   }
+   };
 
-   function handleChange(event) {
+   const handleClose = () => setShowModal(false);
+
+   const handleChange = event =>
       setCharacter({ ...character, [event.target.name]: event.target.value });
-   }
 
-   function handleAbilityChange(event) {
+   const handleAbilityChange = event =>
       setCharacter({
          ...character,
          abilities: {
@@ -125,9 +120,8 @@ export default function Landing() {
             [event.target.name]: Number(event.target.value)
          }
       });
-   }
 
-   function handleSubmit(event) {
+   const handleSubmit = event => {
       event.preventDefault();
 
       // character names are REQUIRED in our schema
@@ -139,10 +133,13 @@ export default function Landing() {
 
       validateSubmit();
       postCharacter().then(id => history.push(`/characters/${id}`));
-   }
+   };
 
-   async function postCharacter() {
-      const url = 'https://dndcc-api.herokuapp.com/characters';
+   const postCharacter = async () => {
+      const url =
+         process.env.NODE_ENV === 'production'
+            ? 'https://dndcc-api.herokuapp.com/characters'
+            : 'http://localhost:4000/characters';
       const headers = { 'Content-Type': 'application/json' };
 
       try {
@@ -153,9 +150,13 @@ export default function Landing() {
       } catch (error) {
          console.error(error);
       }
-   }
+   };
 
-   const handleClose = () => setShowModal(false);
+   const toTitleCase = string =>
+      string
+         .split(' ')
+         .map(word => word[0].toUpperCase().concat(word.slice(1)))
+         .join(' ');
 
    return (
       <>

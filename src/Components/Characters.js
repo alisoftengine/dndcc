@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Modal from 'react-bootstrap/Modal';
@@ -13,18 +13,47 @@ export default function Characters() {
    const [showModal, setShowModal] = useState(false);
    const history = useHistory();
 
-   useEffect(() => {
-      const fetchCharacters = async () => {
-         const charList = await axios(
-            'https://dndcc-api.herokuapp.com/characters'
-            // 'http://localhost:4000/characters'
-         );
+   useEffect(() => fetchCharacters(), []);
+
+   const fetchCharacters = async () => {
+      try {
+         const url =
+            process.env.NODE_ENV === 'production'
+               ? 'https://dndcc-api.herokuapp.com/characters'
+               : 'http://localhost:4000/characters';
+
+         const charList = await axios(url);
          setCharacters(charList.data);
-      };
-      fetchCharacters();
-   }, []);
+      } catch (error) {
+         console.log(error);
+      }
+   };
 
    const handleClose = () => setShowModal(false);
+
+   const handleView = id => history.push(`/characters/${id}`);
+
+   const handleEdit = id => history.push(`/characters/${id}/edit`);
+
+   const promptDelete = id => {
+      setId(id);
+      setShowModal(true);
+   };
+
+   const handleDelete = async () => {
+      try {
+         const url =
+            process.env.NODE_ENV === 'production'
+               ? `https://dndcc-api.herokuapp.com/characters/${id}`
+               : `http://localhost:4000/characters/${id}`;
+
+         await axios.delete(url);
+         fetchCharacters();
+         handleClose();
+      } catch (error) {
+         console.log(error);
+      }
+   };
 
    return (
       <>
@@ -44,17 +73,7 @@ export default function Characters() {
                <Button variant='warning' onClick={handleClose}>
                   Nevermind
                </Button>
-               <Button
-                  variant='danger'
-                  onClick={() => {
-                     console.log(id);
-                     // axios
-                     //    .delete(`http://localhost:4000/characters/${id}`)
-                     //    .then(() => {
-                     //       handleClose();
-                     //       history.push('/characters');
-                     //    });
-                  }}>
+               <Button variant='danger' onClick={handleDelete}>
                   Yes, delete
                </Button>
             </Modal.Footer>
@@ -68,22 +87,17 @@ export default function Characters() {
                      <div className='controls'>
                         <Button
                            variant='success'
-                           onClick={() =>
-                              history.push(`/characters/${characterInfo._id}`)
-                           }>
+                           onClick={() => handleView(characterInfo._id)}>
                            VIEW
                         </Button>
-
-                        <Link to={`characters/${characterInfo._id}/edit`}>
-                           <Button variant='dark'>EDIT</Button>
-                        </Link>
-
+                        <Button
+                           variant='dark'
+                           onClick={() => handleEdit(characterInfo._id)}>
+                           EDIT
+                        </Button>
                         <Button
                            variant='danger'
-                           onClick={() => {
-                              setId(characterInfo._id);
-                              setShowModal(true);
-                           }}>
+                           onClick={() => promptDelete(characterInfo._id)}>
                            DELETE
                         </Button>
                      </div>
