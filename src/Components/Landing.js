@@ -79,12 +79,6 @@ export default function Landing() {
       'charisma'
    ];
 
-   const toTitleCase = string =>
-      string
-         .split(' ')
-         .map(word => word[0].toUpperCase().concat(word.slice(1)))
-         .join(' ');
-
    // make sure our data validates against our schema before sending it over
    // if certain fields are missing, randomly choose them
    function validateSubmit() {
@@ -112,6 +106,8 @@ export default function Landing() {
                character.abilities[ability] || sample())
       );
    }
+
+   const handleClose = () => setShowModal(false);
 
    function handleChange(event) {
       setCharacter({ ...character, [event.target.name]: event.target.value });
@@ -142,7 +138,10 @@ export default function Landing() {
    }
 
    async function postCharacter() {
-      const url = 'https://dndcc-api.herokuapp.com/characters';
+      const url =
+         process.env.NODE_ENV === 'production'
+            ? 'https://dndcc-api.herokuapp.com/characters'
+            : 'http://localhost:4000/characters';
       const headers = { 'Content-Type': 'application/json' };
 
       try {
@@ -155,7 +154,11 @@ export default function Landing() {
       }
    }
 
-   const handleClose = () => setShowModal(false);
+   const toTitleCase = string =>
+      string
+         .split(' ')
+         .map(word => word[0].toUpperCase().concat(word.slice(1)))
+         .join(' ');
 
    return (
       <>
