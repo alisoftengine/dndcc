@@ -155,19 +155,23 @@ export default function Landing() {
       }
    }
 
+   const handleClose = () => setShowModal(false);
+
    return (
-      <div className='create-form-container'>
-         <Modal show={showModal} background='static' keyboard='false'>
+      <>
+         <Modal
+            show={showModal}
+            centered
+            onHide={handleClose}
+            background='static'
+            keyboard={false}>
             <Modal.Header>
                <Modal.Title>Invalid character name</Modal.Title>
             </Modal.Header>
-            <Modal.Body>
-               Please give your character a valid name. Empty names are invalid.
-               Close this dialog, and try again.
-            </Modal.Body>
+            <Modal.Body>Your hero requires a name!</Modal.Body>
             <Modal.Footer>
-               <Button variant='secondary' onClick={() => setShowModal(false)}>
-                  Close
+               <Button variant='warning' onClick={handleClose}>
+                  OK, try again
                </Button>
             </Modal.Footer>
          </Modal>
@@ -211,7 +215,9 @@ export default function Landing() {
                   value={character.name}
                   onChange={handleChange}
                />
-               <Form.Text>Character name is required.</Form.Text>
+               <Badge className='required' variant='danger'>
+                  REQUIRED
+               </Badge>
             </Form.Group>
 
             <Form.Group className='sex-container'>
@@ -304,9 +310,7 @@ export default function Landing() {
                <Form.Group key={ability} className='range-container'>
                   <div className='stat-container'>
                      <Form.Label>{toTitleCase(ability)}</Form.Label>
-                     <Badge variant='primary'>
-                        {character.abilities[ability] || '??'}
-                     </Badge>
+                     <Badge>{character.abilities[ability] || '??'}</Badge>
                   </div>
                   <Form.Control
                      type='range'
@@ -319,10 +323,10 @@ export default function Landing() {
                </Form.Group>
             ))}
 
-            <Button type='submit' variant='primary'>
-               Submit
+            <Button type='submit' variant='success'>
+               SUBMIT
             </Button>
          </Form>
-      </div>
+      </>
    );
 }

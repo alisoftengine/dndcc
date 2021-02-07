@@ -1,8 +1,8 @@
-/* .nav-bar {
-   display: flex;
-   flex-direction: row;
-   justify-items: end;
-} */
+.navbar {
+   background-color: var(--danger);
+}
 
-#links {
+.navbar-nav .nav-item .nav-link,
+.navbar-nav .nav-item .nav-link:hover {
+   color: white;
 }

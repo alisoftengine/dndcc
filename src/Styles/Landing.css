@@ -1,3 +1,7 @@
+.create-header {
+   font-size: 1.5rem;
+}
+
 .create-header + .form-text {
    margin-bottom: 2rem;
 }
@@ -12,7 +16,7 @@
 
 .name-container,
 .sex-container {
-   grid-template-columns: 80px 1fr;
+   grid-template-columns: 90px 1fr;
 }
 
 .name-container {
@@ -30,14 +34,14 @@
 
 .name-container .form-control,
 .sex-container .sex-options,
-.character-name-container .form-text,
+.character-name-container .required,
 .dropdown-container select,
 .range-container .form-control-range {
    grid-column: 2 / span 1;
 }
 
 .character-name-container {
-   grid-template-rows: 1fr 20px;
+   grid-template-rows: 1fr 24px;
 }
 
 .character-name-container .form-label,
@@ -45,31 +49,49 @@
    grid-row: 1 / span 1;
 }
 
-.character-name-container .form-text {
-   color: red;
+.character-name-container .required {
+   color: var(--bg);
    grid-row: 2 / span 1;
    justify-self: start;
    margin-left: 0.5rem;
 }
 
-.sex-container,
-.dropdown-container {
-   align-self: start;
-}
-
 .sex-container .sex-options {
    display: flex;
+   align-self: start;
    margin-left: 0.5rem;
 }
 
+.sex-options input {
+   appearance: none;
+   width: 1rem;
+   height: 1rem;
+   border: 3px solid var(--fg);
+   border-radius: 50%;
+   transition: all 0.2s linear;
+}
+
+.sex-options input:checked {
+   border-width: 8px;
+}
+
 .dropdown-container {
-   grid-template-columns: 90px 1fr;
+   grid-template-columns: 100px 1fr;
+}
+
+.dropdown-container select {
+   align-self: start;
 }
 
 .range-container {
-   grid-template-columns: 130px 1fr;
+   grid-template-columns: 140px 1fr;
 }
 
 .range-container .stat-container .form-label {
    margin-right: 0.5rem;
+}
+
+.create-form button {
+   font-size: 1rem;
+   padding: 0.8rem 1.2rem;
 }
