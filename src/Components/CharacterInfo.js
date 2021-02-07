@@ -31,6 +31,8 @@ export default function CharacterInfo({ match }) {
 
    const handleClose = () => setShowModal(false);
 
+   const handleEdit = () => history.push(`/characters/${character._id}/edit`);
+
    const handleDelete = async () => {
       try {
          const url =
@@ -136,7 +138,9 @@ export default function CharacterInfo({ match }) {
                <Card.Footer>
                   <p>Created on {friendlyDate(character.created)}</p>
                   <div className='controls'>
-                     <Button variant='dark'>EDIT</Button>
+                     <Button variant='dark' onClick={handleEdit}>
+                        EDIT
+                     </Button>
                      <Button
                         variant='danger'
                         onClick={() => setShowModal(true)}>

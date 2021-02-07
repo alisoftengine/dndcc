@@ -33,6 +33,8 @@ export default function Characters() {
 
    const handleView = id => history.push(`/characters/${id}`);
 
+   const handleEdit = id => history.push(`/characters/${id}/edit`);
+
    const promptDelete = id => {
       setId(id);
       setShowModal(true);
@@ -88,7 +90,11 @@ export default function Characters() {
                            onClick={() => handleView(characterInfo._id)}>
                            VIEW
                         </Button>
-                        <Button variant='dark'>EDIT</Button>
+                        <Button
+                           variant='dark'
+                           onClick={() => handleEdit(characterInfo._id)}>
+                           EDIT
+                        </Button>
                         <Button
                            variant='danger'
                            onClick={() => promptDelete(characterInfo._id)}>
