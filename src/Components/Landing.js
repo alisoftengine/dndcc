@@ -155,19 +155,23 @@ export default function Landing() {
       }
    }
 
+   const handleClose = () => setShowModal(false);
+
    return (
-      <div className='create-form-container'>
-         <Modal show={showModal} background='static' keyboard='false'>
+      <>
+         <Modal
+            show={showModal}
+            centered
+            onHide={handleClose}
+            background='static'
+            keyboard={false}>
             <Modal.Header>
                <Modal.Title>Invalid character name</Modal.Title>
             </Modal.Header>
-            <Modal.Body>
-               Please give your character a valid name. Empty names are invalid.
-               Close this dialog, and try again.
-            </Modal.Body>
+            <Modal.Body>Your hero requires a name!</Modal.Body>
             <Modal.Footer>
-               <Button variant='secondary' onClick={() => setShowModal(false)}>
-                  Close
+               <Button variant='warning' onClick={handleClose}>
+                  OK, try again
                </Button>
             </Modal.Footer>
          </Modal>
@@ -323,6 +327,6 @@ export default function Landing() {
                SUBMIT
             </Button>
          </Form>
-      </div>
+      </>
    );
 }
