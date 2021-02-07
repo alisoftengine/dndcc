@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Table from 'react-bootstrap/Table';
@@ -89,7 +90,9 @@ export default function CharacterInfo({ match }) {
             <Card.Footer>
                <p>Created on {friendlyDate(character.created)}</p>
                <div className='controls'>
-                  <Button variant='dark'>EDIT</Button>
+                  <Link to={`${character._id}/edit`}>
+                     <Button variant='dark'>EDIT</Button>
+                  </Link>
                   <Button variant='danger'>DELETE</Button>
                </div>
             </Card.Footer>

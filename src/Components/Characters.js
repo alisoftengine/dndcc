@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Modal from 'react-bootstrap/Modal';
@@ -73,7 +73,11 @@ export default function Characters() {
                            }>
                            VIEW
                         </Button>
-                        <Button variant='dark'>EDIT</Button>
+
+                        <Link to={`characters/${characterInfo._id}/edit`}>
+                           <Button variant='dark'>EDIT</Button>
+                        </Link>
+
                         <Button
                            variant='danger'
                            onClick={() => {
