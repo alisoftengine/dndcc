@@ -2,10 +2,19 @@
    text-align: center;
 }
 
-.App-header {
-   background-color: #282c34;
+main {
+   margin: 1rem 1rem 3rem;
 }
 
-main {
-   margin: 1rem;
+.modal-content {
+   background-color: var(--bg);
+}
+
+.modal-header {
+   color: var(--danger);
+}
+
+.modal-header,
+.modal-footer {
+   border-color: var(--fg);
 }

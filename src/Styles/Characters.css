@@ -1,13 +1,20 @@
-#view-button {
-   display: flex;
-   width: 5rem;
+.character {
+   color: var(--bg);
+   background-color: var(--fg);
+   margin: 1rem;
+   border-radius: 6px;
 }
 
-.character-link {
-   width: 10rem;
+.controls {
+   display: flex;
+   justify-content: space-between;
+}
+
+.controls button {
+   min-width: 80px;
 }
 
 .character-name {
-   font-style: bold;
-   font-size: 2rem;
+   font-family: var(--main-font);
+   font-size: 1.5rem;
 }

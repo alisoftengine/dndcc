@@ -1,3 +1,5 @@
-.header {
-   /* background-color: aquamarine; */
+header h1 {
+   font-family: var(--main-font);
+   font-size: 2rem;
+   margin: 1rem 0;
 }

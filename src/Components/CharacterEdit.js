@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import Badge from 'react-bootstrap/Badge';
 import Button from 'react-bootstrap/Button';
@@ -8,7 +8,7 @@ import axios from 'axios';
 
 import '../Styles/Landing.css';
 
-export default function Landing() {
+export default function CharacterEdit({ match }) {
    const initCharacter = {
       player: '',
       campaign: '',
@@ -31,6 +31,25 @@ export default function Landing() {
    const [character, setCharacter] = useState(initCharacter);
    const [showModal, setShowModal] = useState(false);
    const history = useHistory();
+
+   useEffect(
+      () => fetchCharacter(match.params.id).then(data => setCharacter(data)),
+      [match]
+   );
+
+   const fetchCharacter = async id => {
+      try {
+         const url =
+            process.env.NODE_ENV === 'production'
+               ? `https://dndcc-api.herokuapp.com/characters/${id}`
+               : `http://localhost:4000/characters/${id}`;
+
+         const response = await axios(url);
+         return response.data;
+      } catch (error) {
+         console.log(error);
+      }
+   };
 
    // static creation options
    // TODO move these to a collection on the server and request them on render
@@ -132,18 +151,18 @@ export default function Landing() {
       }
 
       validateSubmit();
-      postCharacter().then(id => history.push(`/characters/${id}`));
+      putCharacter().then(id => history.push(`/characters/${id}`));
    };
 
-   const postCharacter = async () => {
+   const putCharacter = async () => {
       const url =
          process.env.NODE_ENV === 'production'
-            ? 'https://dndcc-api.herokuapp.com/characters'
-            : 'http://localhost:4000/characters';
+            ? `https://dndcc-api.herokuapp.com/characters/${character._id}`
+            : `http://localhost:4000/characters/${character._id}`;
       const headers = { 'Content-Type': 'application/json' };
 
       try {
-         const response = await axios.post(url, character, {
+         const response = await axios.put(url, character, {
             headers: headers
          });
          return response.data._id;
@@ -191,7 +210,7 @@ export default function Landing() {
                   type='text'
                   placeholder='Enter your name'
                   name='player'
-                  value={character.player}
+                  value={character && character.player}
                   onChange={handleChange}
                />
             </Form.Group>
@@ -202,7 +221,7 @@ export default function Landing() {
                   type='text'
                   placeholder='Enter campaign name'
                   name='campaign'
-                  value={character.campaign}
+                  value={character && character.campaign}
                   onChange={handleChange}
                />
             </Form.Group>
@@ -213,7 +232,7 @@ export default function Landing() {
                   type='text'
                   placeholder='Enter character name'
                   name='name'
-                  value={character.name}
+                  value={character && character.name}
                   onChange={handleChange}
                />
                <Badge className='required' variant='danger'>
@@ -232,7 +251,7 @@ export default function Landing() {
                         type='radio'
                         name='sex'
                         value={sex}
-                        checked={character.sex === sex}
+                        checked={character && character.sex === sex}
                         onChange={handleChange}
                      />
                   ))}
@@ -243,7 +262,7 @@ export default function Landing() {
                <Form.Label>Race</Form.Label>
                <select
                   name='race'
-                  defaultValue={character.race || 'select'}
+                  value={character && character.race}
                   onChange={handleChange}>
                   <option value='select' disabled hidden>
                      Choose your race
@@ -260,7 +279,7 @@ export default function Landing() {
                <Form.Label>Class</Form.Label>
                <select
                   name='class'
-                  defaultValue={character.class || 'select'}
+                  value={character && character.class}
                   onChange={handleChange}>
                   <option value='select' disabled hidden>
                      Choose your class
@@ -277,7 +296,7 @@ export default function Landing() {
                <Form.Label>Background</Form.Label>
                <select
                   name='background'
-                  defaultValue={character.background || 'select'}
+                  value={character && character.background}
                   onChange={handleChange}>
                   <option value='select' disabled hidden>
                      Choose your background
@@ -294,7 +313,7 @@ export default function Landing() {
                <Form.Label>Alignment</Form.Label>
                <select
                   name='alignment'
-                  defaultValue={character.alignment || 'select'}
+                  value={character && character.alignment}
                   onChange={handleChange}>
                   <option value='select' disabled hidden>
                      Choose your alignment
@@ -311,14 +330,16 @@ export default function Landing() {
                <Form.Group key={ability} className='range-container'>
                   <div className='stat-container'>
                      <Form.Label>{toTitleCase(ability)}</Form.Label>
-                     <Badge>{character.abilities[ability] || '??'}</Badge>
+                     <Badge>
+                        {(character && character.abilities[ability]) || '??'}
+                     </Badge>
                   </div>
                   <Form.Control
                      type='range'
                      name={ability}
                      min='3'
                      max='18'
-                     value={character.abilities[ability]}
+                     value={character && character.abilities[ability]}
                      onChange={handleAbilityChange}
                   />
                </Form.Group>
