@@ -18,3 +18,26 @@
    font-family: var(--main-font);
    font-size: 1.5rem;
 }
+
+@media screen and (width: 768px) {
+   .character {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      padding: 1rem;
+   }
+
+   .character-name {
+      font-size: 2rem;
+      grid-column: 1 span 1;
+      margin: 0;
+   }
+
+   .controls {
+      grid-column: 2 span 1;
+      justify-content: space-evenly;
+   }
+
+   .controls button {
+      min-width: 90px;
+   }
+}
