@@ -29,10 +29,10 @@
    justify-content: space-evenly;
 }
 
-@media screen and (width: 768px) {
+@media screen and (min-width: 768px) {
    .character-card {
       max-width: 600px;
-      margin: 2rem auto;
+      margin: 2rem;
    }
 
    .card-header .character-name {
@@ -65,7 +65,7 @@
       margin-bottom: 1rem;
    }
 
-   .controls button {
+   .card-footer .controls button {
       font-size: 1.5rem;
    }
 

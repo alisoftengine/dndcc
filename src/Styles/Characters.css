@@ -19,8 +19,9 @@
    font-size: 1.5rem;
 }
 
-@media screen and (width: 768px) {
+@media screen and (min-width: 768px) {
    .character {
+      max-width: 720px;
       display: grid;
       grid-template-columns: 1fr 1fr;
       padding: 1rem;
@@ -38,6 +39,6 @@
    }
 
    .controls button {
-      min-width: 90px;
+      font-size: 1.2rem;
    }
 }
