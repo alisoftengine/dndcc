@@ -95,3 +95,63 @@
    font-size: 1rem;
    padding: 0.8rem 1.2rem;
 }
+
+@media screen and (min-width: 768px) {
+   .create-form .create-header {
+      font-size: 3rem;
+   }
+
+   .create-form .form-text {
+      font-size: 1.25rem;
+   }
+
+   .form-group .form-label {
+      font-size: 1.5rem;
+   }
+
+   .name-container .form-label,
+   .sex-container .form-label,
+   .dropdown-container .form-label,
+   .range-container .stat-container {
+      margin-right: 1rem;
+   }
+
+   .form-group .form-control {
+      font-size: 1.5rem;
+   }
+
+   .character-name-container {
+      grid-template-rows: 1fr 32px;
+   }
+
+   .character-name-container .required {
+      font-size: 1rem;
+   }
+
+   .sex-options input {
+      width: 1.5rem;
+      height: 1.5rem;
+   }
+
+   .sex-container .sex-options {
+      align-self: center;
+   }
+
+   .sex-options input:checked {
+      border-width: 12px;
+   }
+
+   .dropdown-container select {
+      font-size: 1.5rem;
+   }
+
+   .range-container .stat-container {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+   }
+
+   .range-container .stat-container .badge {
+      font-size: 1.5rem;
+   }
+}
