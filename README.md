@@ -12,7 +12,7 @@
 
 ## Welcome
 
-Welcome to the **Dungeons and Dragons Character Creator (DnDCC)**! This web-app is a one stop shop for quickly and efficiently creating a Dungeons and Dragons (DnD) character. [Dungeons And Dragons](https://en.wikipedia.org/wiki/Dungeons_%26_Dragons) is a fantasy tabletop role-playing game (RPG) originally released in **1974**, designed by Dave Arnerson and Gary Gygax. Over the course of _almost half a century_, **DnD** has evolved through 5 editions, each incorporating unique elements and gameplay integrated into **DnD's** timeless RPG theme. **DnDCC** was developed by **Keenan Ward**, **Fahim Ali**, and **Joachim Cañete**, students in General Assembly's Software Engineering Immersive Program, Cohort SEI: 1130.
+Welcome to the **Dungeons and Dragons Character Creator (DnDCC)**! This web-app is a one stop shop for quickly and efficiently creating a Dungeons and Dragons (DnD) character. [Dungeons And Dragons](https://en.wikipedia.org/wiki/Dungeons_%26_Dragons) is a fantasy tabletop role-playing game (RPG) originally released in **1974**, designed by Dave Arnerson and Gary Gygax. Over the course of _almost half a century_, **DnD** has evolved through 5 editions, each incorporating unique elements and gameplay integrated into **DnD's** timeless RPG theme. **DnDCC** was developed by **Keenan Ward**, **Fahim Ali**, and **Joachim Cañete**.
 
 ## About
 
@@ -26,7 +26,7 @@ You can view the **(DnDCC)** [HERE](https://dndcc.herokuapp.com/)!
 
 ## Interaction
 
-Upon entering into the **DnDCC**, the user will be presented with the **Character Create** page which features the character creation event. The user can enter in their desired character information in the various input fields, then click the **"Submit"** button at the bottom of the page. However, the only field _required_ for character submission is the **Character Name**. The **Player Name** and **Campaign Name** can remain empty while all other fields will generate random attributes. All information can be edited later in the **Character Edit** page.
+Upon visting **DnDCC**, the user will be presented with the **Character Create** page which features the character creation event. The user can enter their desired character information in the various input fields, then click the **"Submit"** button at the bottom of the page. However, the only field _required_ for character submission is the **Character Name**. The **Player Name** and **Campaign Name** can remain empty while all other fields will generate random attributes. All information can be edited later in the **Character Edit** page.
 
 ![creation_page2](https://i.imgur.com/u5Sqbnl.png)
 
@@ -44,7 +44,7 @@ At any point in time, the user may enter the **Character Create** and **Characte
 
 ## Development
 
-The **DnDCC**'s functionality was built to accomodate **full CRUD** services, allowing it's users to _create_, _read_, _update_, and _delete_ information available in the web-app. using `React` to host the front-end components, a component hierarchy was mapped out to focus on allowing for the user's ease of use and navigation. Routing the user from **Character Create** to **Character View** with an ever-present navigation bar that provided a route to **Character Selection** made for an intuitive design.
+**DnDCC**'s functionality was built to accomodate **full CRUD** services, allowing it's users to _create_, _read_, _update_, and _delete_ information available in the web-app. using `React` to host the front-end components, a component hierarchy was mapped out to focus on allowing for the user's ease of use and navigation. Routing the user from **Character Create** to **Character View** with an ever-present navigation bar that provided a route to **Character Selection** made for an intuitive design.
 
 _Back-end_ scaffolding was built to provide the _front-end_ with **RESTful API** functionality. Utilizing `MongoDB` to create and store this information, API calls were made in the **Character Select**, **Character View**, and **Character Edit** components to render consistent information across all characters created.
 
