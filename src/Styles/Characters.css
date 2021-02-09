@@ -3,6 +3,7 @@
    background-color: var(--fg);
    margin: 1rem;
    border-radius: 6px;
+   min-width: 320px;
 }
 
 .controls {
