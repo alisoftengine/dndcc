@@ -60,14 +60,14 @@ A first-draft wireframe for the **Character View** page incorporated many of the
 
 ## User Stories
 
--  As a player, I want to model a character quickly and easily.
--  As a player, I want to input my name.
--  As a player, I want to input the campaign name.
--  As a player, I want to input the character’s name.
--  As a player, I want to choose the character’s sex.
--  As a player, I want to choose from the basic races.
--  As a player, I want to choose from the basic classes.
--  As a player, I would like to choose my ability point loadout (APL).
--  As a player, I want to choose from the basic backgrounds.
--  As a player, I want to choose from the nine alignments.
--  As a player, I want to peruse custom character loadouts that other people have created.
+- [x] As a player, I want to model a character quickly and easily.
+- [x] As a player, I want to input my name.
+- [x] As a player, I want to input the campaign name.
+- [x] As a player, I want to input the character’s name.
+- [x] As a player, I want to choose the character’s sex.
+- [x] As a player, I want to choose from the basic races.
+- [x] As a player, I want to choose from the basic classes.
+- [x] As a player, I would like to choose my ability point loadout (APL).
+- [x] As a player, I want to choose from the basic backgrounds.
+- [x] As a player, I want to choose from the nine alignments.
+- [x] As a player, I want to peruse custom character loadouts that other people have created.
