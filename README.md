@@ -1,8 +1,8 @@
-# GA-SEI-Project-Three
+[![](https://i.imgur.com/s4vGTr0.png)](https://dndcc.herokuapp.com)
 
-## Dungeons and Dragons Character Creator (DnDCC)
+# Dungeons and Dragons Character Creator (DnDCC)
 
-#### SEI: 1130, Project Three
+#### GA-SEI-Project-Three
 
 #### Scrum Master: Keenan Ward
 
