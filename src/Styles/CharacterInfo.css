@@ -28,3 +28,48 @@
 .card-footer .controls {
    justify-content: space-evenly;
 }
+
+@media screen and (width: 768px) {
+   .character-card {
+      max-width: 600px;
+      margin: 2rem auto;
+   }
+
+   .card-header .character-name {
+      font-size: 3rem;
+   }
+
+   .character-card .card-body {
+      padding: 1.5rem;
+   }
+
+   .card-title {
+      font-size: 1.8rem;
+   }
+
+   .optional-info {
+      font-size: 1.5rem;
+      margin-top: 1rem;
+   }
+
+   .attribute-table {
+      font-size: 1.5rem;
+   }
+
+   .card-footer p {
+      font-size: 1.5rem;
+   }
+
+   .card-footer .controls {
+      justify-content: center;
+      margin-bottom: 1rem;
+   }
+
+   .controls button {
+      font-size: 1.5rem;
+   }
+
+   .controls button + button {
+      margin-left: 2rem;
+   }
+}
