@@ -3,6 +3,8 @@
 }
 
 main {
+   display: flex;
+   justify-content: center;
    margin: 1rem 1rem 3rem;
 }
 
@@ -17,4 +19,21 @@ main {
 .modal-header,
 .modal-footer {
    border-color: var(--fg);
+}
+
+@media screen and (min-width: 768px) {
+   .modal-title {
+      font-size: 2rem;
+      margin: 0.5rem 1rem;
+   }
+
+   .modal-body {
+      font-size: 1.5rem;
+      margin: 1rem;
+   }
+
+   .modal-footer button {
+      font-size: 1.2rem;
+      margin: 1rem;
+   }
 }
